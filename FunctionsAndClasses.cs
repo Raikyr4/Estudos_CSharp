@@ -3,6 +3,7 @@ using System.Globalization;
 
 namespace Funcoes
 {
+    //Uma instância de uma classe é um ponteiro para um objeto na memoria que tem todods os atributops alocados
     public class Carro //deve ser colocada fora do programa principal, mas está aqui só de exemplo
     {
 
