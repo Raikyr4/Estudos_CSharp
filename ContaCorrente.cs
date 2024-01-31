@@ -1,14 +1,26 @@
-﻿
+// namespaces saõ importantes para a organização dos projetos e também são usados para importar classes entre os programas e projetos
 namespace POO
 {
     class ContaCorrente
     {
-        // Membros da classe
-        public string Titular;
-        public string Conta;
-        public int NumeroAgencia;
-        public string NomeAgencia;
-        public double Saldo;
+
+        //Membros estáticos em C# referem-se a campos, 
+        //propriedades, métodos ou eventos 
+        //que pertencem à própria classe, em vez de 
+        //pertencerem a instâncias específicas da classe. 
+
+        public static int NumeroDeInstancias = 0;
+        // aumenta toda vez que eu quiser
+
+
+        //devemos lembrar de outros metodos de acesso tipo internal(é o padrão), protected , private e public
+        // Propriedades autoimplementadas públicas com acesso a atributos privados
+        // é sempre bom deixar a proriedade set privada e apenas o get publico
+        public string Titular { get; private set; }
+        public string Conta { get; private set; }
+        public int NumeroAgencia { get; private set; }
+        public string NomeAgencia { get; private set; }
+        public double Saldo { get; private set; }
 
         // Construtor
         public ContaCorrente(string titular, string conta, int numeroAgencia, string nomeAgencia, double saldoInicial)
@@ -20,7 +32,7 @@ namespace POO
             Saldo = saldoInicial;
         }
 
-        // Método para realizar um depósito
+        // Métodos públicos para interagir com as propriedades
         public void Depositar(double valor)
         {
             Saldo += valor;
@@ -35,15 +47,13 @@ namespace POO
         // usamos a sintaxe params para que isso seja possível
         public void VariosDepositos(params double[] valores)
         {
-            for (int i = 0; i < valores.Length; i++)
+            foreach (var valor in valores)
             {
-                Saldo += valores[i];
-
-                Console.WriteLine($"Depósito de {valores[i]:C} realizado. Novo saldo: {Saldo:C}");
+                Saldo += valor;
+                Console.WriteLine($"Depósito de {valor:C} realizado. Novo saldo: {Saldo:C}");
             }
         }
 
-        // Método para realizar um saque
         public void Sacar(double valor)
         {
             if (valor > Saldo)
@@ -57,7 +67,6 @@ namespace POO
             }
         }
 
-        // Método para exibir informações da conta
         public void ExibirInformacoes()
         {
             Console.WriteLine($"Titular: {Titular}");
